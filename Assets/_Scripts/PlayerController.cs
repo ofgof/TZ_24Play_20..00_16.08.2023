@@ -1,10 +1,11 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private CharacterController _characterController;
+    [SerializeField] private float _halfTrackWeidth;
     [SerializeField] private float _forwardSpeed;
     [SerializeField] private float _sideSpeed;
     public void Init()
@@ -21,10 +22,24 @@ public class PlayerController : MonoBehaviour
     }
     private void MoveForward()
     {
-        _characterController.Move(_forwardSpeed * Time.deltaTime * gameObject.transform.forward);
+        var targetPosition = transform.position + _forwardSpeed * Time.deltaTime * transform.forward;
+        transform.DOMoveZ(targetPosition.z, Time.deltaTime);
     }
     private void MoveSide(float direction)
     {
-        _characterController.Move(direction * _sideSpeed * Time.deltaTime * gameObject.transform.right);
+        var position = transform.position;
+        var deltaPosition = direction * _sideSpeed * Time.deltaTime * gameObject.transform.right;
+        var targetPosition = position + deltaPosition;
+
+        if(Mathf.Abs(targetPosition.x) < _halfTrackWeidth)
+        {
+            transform.DOMoveX(targetPosition.x, Time.deltaTime);
+        }
+        else
+        {
+            position.x = Mathf.Sign(position.x) * _halfTrackWeidth;
+            transform.position = position;
+        }
+
     }
 }
