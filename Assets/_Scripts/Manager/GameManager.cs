@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [SerializeField] private ViewController _viewController;
+    [SerializeField] private PlayerController _playerController;
 
     private void Awake()
     {
@@ -26,5 +27,6 @@ public class GameManager : MonoBehaviour
     private void Init()
     {
         _viewController.Init();
+        _playerController.Init();
     }
 }
