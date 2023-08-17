@@ -73,8 +73,14 @@ public class PlayerController : MonoBehaviour
         _character.transform.DOMoveY(_character.transform.position.y + cubeSide, duration).SetEase(Ease.Linear).OnComplete(() =>
         {
             newCube.transform.parent = _cubeHolder.transform;
-            newCube.transform.localPosition = cubeSide * (_cubeHolder.transform.childCount - 1) * Vector3.up;
+            var targetPosition = cubeSide * (_cubeHolder.transform.childCount - 1) * Vector3.up;
+            newCube.transform.localPosition = targetPosition;
             newCube.SetActive(true);
+            var collect = Instantiate(GameManager.Instance.VFXHolder.GetVFX(VFXType.CollectVFX));
+            collect.transform.position = newCube.transform.position;
+            var plusOne = Instantiate(GameManager.Instance.VFXHolder.GetVFX(VFXType.CollectPlusOne));
+            plusOne.transform.position = _character.transform.position;
+            plusOne.transform.DOMoveY(_character.transform.position.y + 1.5f, duration).SetEase(Ease.Linear);
         });
     }
 }

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static Action OnGameEnd;
 
     [SerializeField] private GlobalConstants _globalConstants;
+    [SerializeField] private VFXHolder _VFXHolder;
 
     [SerializeField] private ViewController _viewController;
     [SerializeField] private PlayerController _playerController;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     private bool _isGame = false;
 
     public GlobalConstants GlobalConstants => _globalConstants;
+    public VFXHolder VFXHolder => _VFXHolder;
 
     public bool IsGame => _isGame;
 
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
     }
     private void Init()
     {
+        _VFXHolder.Init();
         _viewController.Init();
         _playerController.Init();
         _levelController.Init();

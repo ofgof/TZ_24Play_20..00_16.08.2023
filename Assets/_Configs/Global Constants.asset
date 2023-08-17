@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f17aa5d72cf3d24da47a1f6f4bab1c3, type: 3}
   m_Name: Global Constants
   m_EditorClassIdentifier: 
-  _cubeCollectionDuration: 0.5
+  _cubeCollectionDuration: 0.2
   _maxPositionDifference: 0.1
