@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _cubeHolder;
     [SerializeField] private GameObject _character;
 
+    [SerializeField] private AnimatorController _animatorController;
+
     private Coroutine _moveCoroutine;
 
     private Sequence _sideSequence;
@@ -70,6 +72,7 @@ public class PlayerController : MonoBehaviour
         float duration = GameManager.Instance.GlobalConstants.CubeCollectionDuration;
         newCube.SetActive(false);
 
+        _animatorController.Jump();
         _character.transform.DOMoveY(_character.transform.position.y + cubeSide, duration).SetEase(Ease.Linear).OnComplete(() =>
         {
             newCube.transform.parent = _cubeHolder.transform;
