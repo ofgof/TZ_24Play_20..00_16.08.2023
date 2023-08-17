@@ -21,10 +21,14 @@ public class PlayerController : MonoBehaviour
     private Sequence _sideSequence;
     public void Init()
     {
+        _startPosition = transform.position;
+
         InputController.OnSwipe += MoveSide;
         Collector.OnCollect += CollectAnimation;
         GameManager.OnGameStart += StartMove;
         GameManager.OnGameEnd += StopMove;
+
+        GameManager.OnGameRestart += ResetPlayer;
     }
     private void OnDestroy()
     {
@@ -32,6 +36,9 @@ public class PlayerController : MonoBehaviour
         Collector.OnCollect -= CollectAnimation;
         GameManager.OnGameStart -= StartMove;
         GameManager.OnGameEnd -= StopMove;
+
+        GameManager.OnGameRestart -= ResetPlayer;
+
     }
     private void StartMove()
     {
@@ -86,5 +93,10 @@ public class PlayerController : MonoBehaviour
             plusOne.transform.position = _character.transform.position;
             plusOne.transform.DOMoveY(_character.transform.position.y + 1.5f, duration).SetEase(Ease.Linear);
         });
+    }
+
+    private void ResetPlayer()
+    {
+        transform.position = _startPosition;
     }
 }

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Global Constants
   m_EditorClassIdentifier: 
   _cubeCollectionDuration: 0.2
-  _maxPositionDifference: 0.1
+  _maxPositionDifferenceCube: 0.1
+  _maxPositionDifferenceCharacter: 1.1

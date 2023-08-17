@@ -8,7 +8,12 @@ public class GlobalConstants : ScriptableObject
     [SerializeField] private float _cubeCollectionDuration;
     public float CubeCollectionDuration => _cubeCollectionDuration;
 
-    [SerializeField] private float _maxPositionDifference;
-    public float MaxPositionDifference => _maxPositionDifference;
+    [SerializeField] private float _maxPositionDifferenceCube;
+    public float MaxPositionDifferenceCube => _maxPositionDifferenceCube;
+
+    [SerializeField] private float _maxPositionDifferenceCharacter;
+    public float MaxPositionDifferenceCharacter => _maxPositionDifferenceCharacter;
+
+
 
 }

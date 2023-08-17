@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
 
     private float _touchPositionX;
     private bool _isGameStarted = false;
+    private bool _isGameEnded = false;
     private Coroutine _swipeCoroutine;
     private void Start()
     {
@@ -25,6 +26,7 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         //CheckSwipe();
+        if (_isGameEnded) return;
         if (!_isGameStarted && Input.GetMouseButtonDown(0))
         {
             _isGameStarted = true;
@@ -39,6 +41,7 @@ public class InputController : MonoBehaviour
     {
         StopCoroutine(_swipeCoroutine);
         _isGameStarted = false;
+        _isGameEnded = true;
     }
     private IEnumerator CheckSwipe()
     {

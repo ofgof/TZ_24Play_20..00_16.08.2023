@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    private float _maxPositionDifference;
+    private float _maxPositionDifferenceCube;
+    private float _maxPositionDifferenceCharacter;
     private void Start()
     {
-        _maxPositionDifference = GameManager.Instance.GlobalConstants.MaxPositionDifference;
+        _maxPositionDifferenceCube = GameManager.Instance.GlobalConstants.MaxPositionDifferenceCube;
+        _maxPositionDifferenceCharacter = GameManager.Instance.GlobalConstants.MaxPositionDifferenceCharacter;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -15,7 +17,7 @@ public class Wall : MonoBehaviour
         if(stopableObject != null)
         {
             var directionToCube = collision.gameObject.transform.position - transform.position;
-            if (directionToCube.y > _maxPositionDifference) return;
+            if (directionToCube.y > _maxPositionDifferenceCube) return;
 
             stopableObject.Stop();
         }
@@ -24,7 +26,8 @@ public class Wall : MonoBehaviour
         if (killableObject != null)
         {
             var directionToCharacter = collision.gameObject.transform.position - transform.position;
-            if (directionToCharacter.y > _maxPositionDifference) return;
+            Debug.Log("directionToCharacter = " + directionToCharacter);
+            if (directionToCharacter.y > _maxPositionDifferenceCharacter) return;
 
             killableObject.Kill();
         }

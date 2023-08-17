@@ -7,7 +7,7 @@ public class Ground : MonoBehaviour
     private float _maxPositionDifference;
     private void Start()
     {
-        _maxPositionDifference = GameManager.Instance.GlobalConstants.MaxPositionDifference;
+        _maxPositionDifference = GameManager.Instance.GlobalConstants.MaxPositionDifferenceCharacter;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -15,7 +15,7 @@ public class Ground : MonoBehaviour
         if (killableObject != null)
         {
             var directionToCharacter = collision.gameObject.transform.position - transform.position;
-            
+            Debug.Log("directionToCharacter = " + directionToCharacter);
             if (directionToCharacter.y > _maxPositionDifference) return;
 
             killableObject.Kill();
