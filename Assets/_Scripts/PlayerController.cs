@@ -5,41 +5,76 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Vector3 _startPosition;
     [SerializeField] private float _halfTrackWeidth;
     [SerializeField] private float _forwardSpeed;
     [SerializeField] private float _sideSpeed;
+
+    [SerializeField] private GameObject _cubeHolder;
+    [SerializeField] private GameObject _character;
+
+    private Coroutine _moveCoroutine;
+
+    private Sequence _sideSequence;
     public void Init()
     {
         InputController.OnSwipe += MoveSide;
+        Collector.OnCollect += CollectAnimation;
+        GameManager.OnGameStart += StartMove;
+        GameManager.OnGameEnd += StopMove;
     }
     private void OnDestroy()
     {
         InputController.OnSwipe -= MoveSide;
+        Collector.OnCollect -= CollectAnimation;
+        GameManager.OnGameStart -= StartMove;
+        GameManager.OnGameEnd -= StopMove;
     }
-    private void Update()
+    private void StartMove()
     {
         MoveForward();
     }
     private void MoveForward()
     {
-        var targetPosition = transform.position + _forwardSpeed * Time.deltaTime * transform.forward;
-        transform.DOMoveZ(targetPosition.z, Time.deltaTime);
+        float duration = 1f;
+        var targetPosition = transform.position + _forwardSpeed * Vector3.forward;
+        transform.DOMoveZ(targetPosition.z, duration).SetEase(Ease.Linear).OnComplete(MoveForward);
+    }
+    private void StopMove()
+    {
+        transform.DOKill();
     }
     private void MoveSide(float direction)
     {
+        _sideSequence.Kill();
+        _sideSequence = DOTween.Sequence();
         var position = transform.position;
-        var deltaPosition = direction * _sideSpeed * Time.deltaTime * gameObject.transform.right;
+        var deltaPosition = direction * _sideSpeed * Time.deltaTime * Vector3.right;
         var targetPosition = position + deltaPosition;
 
         if(Mathf.Abs(targetPosition.x) < _halfTrackWeidth)
         {
-            transform.DOMoveX(targetPosition.x, Time.deltaTime);
+            _sideSequence.Append(transform.DOMoveX(targetPosition.x, Time.deltaTime));
         }
         else
         {
             position.x = Mathf.Sign(position.x) * _halfTrackWeidth;
             transform.position = position;
         }
+    }
 
+    private void CollectAnimation(GameObject newCube)
+    {
+        Debug.Log("CollectAnimation");
+        float cubeSide = 1f;
+        float duration = GameManager.Instance.GlobalConstants.CubeCollectionDuration;
+        newCube.SetActive(false);
+
+        _character.transform.DOMoveY(_character.transform.position.y + cubeSide, duration).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            newCube.transform.parent = _cubeHolder.transform;
+            newCube.transform.localPosition = cubeSide * (_cubeHolder.transform.childCount - 1) * Vector3.up;
+            newCube.SetActive(true);
+        });
     }
 }

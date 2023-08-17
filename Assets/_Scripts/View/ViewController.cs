@@ -17,8 +17,16 @@ public class ViewController : MonoBehaviour
         _failView.Init();
 
         OpenStartView();
-    }
 
+        GameManager.OnGameStart += CloseAllView;
+        GameManager.OnGameEnd += OpenFailView;
+    }
+    private void OnDestroy()
+    {
+        GameManager.OnGameStart -= CloseAllView;
+        GameManager.OnGameEnd -= OpenFailView;
+
+    }
     private void OpenStartView()
     {
         CloseAllView();

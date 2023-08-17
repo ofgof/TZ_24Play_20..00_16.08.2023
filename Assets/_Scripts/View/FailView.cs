@@ -10,7 +10,7 @@ public class FailView : View
 
     public override void Init()
     {
-
+        IntiButtons();
     }
 
     public override void Open()
@@ -19,14 +19,14 @@ public class FailView : View
     }
     public override void Close()
     {
-        base .Close();
+        base.Close();
     }
 
     private void IntiButtons()
     {
         _tryAgainButton.onClick.AddListener(() =>
         {
-
+            GameManager.OnGameRestart?.Invoke();
         });
     }
 

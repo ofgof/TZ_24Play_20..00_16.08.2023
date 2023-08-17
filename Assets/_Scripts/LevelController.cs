@@ -6,7 +6,7 @@ public class LevelController : MonoBehaviour
 {
     [SerializeField] private float _chunkLenght;
     [SerializeField] private List<GameObject> _chunkPrefabs;
-    private int _chunkCount;
+    private int _chunkCount = 1;
     public void Init()
     {
         for(int i  = 0; i < 5; i++)

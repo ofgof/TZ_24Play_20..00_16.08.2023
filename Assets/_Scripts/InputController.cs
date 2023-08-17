@@ -10,27 +10,56 @@ public class InputController : MonoBehaviour
     [SerializeField] float _maxMagnitude = 200f;
 
     private float _touchPositionX;
+    private bool _isGameStarted = false;
+    private Coroutine _swipeCoroutine;
+    private void Start()
+    {
+        GameManager.OnGameStart += StartInputControll;
+        GameManager.OnGameEnd += StopInputControll;
+    }
+    private void OnDestroy()
+    {
+        GameManager.OnGameStart -= StartInputControll;
+        GameManager.OnGameEnd -= StopInputControll;
+    }
     private void Update()
     {
-        CheckSwipe();
-    }
-    private void CheckSwipe()
-    {
-        if (Input.GetMouseButtonDown(0))
+        //CheckSwipe();
+        if (!_isGameStarted)
         {
-            _touchPositionX = GetTouchPosition().x;
+            _isGameStarted = true;
+            GameManager.OnGameStart?.Invoke();
         }
-        if (Input.GetMouseButton(0))
+    }
+    private void StartInputControll()
+    {
+        _swipeCoroutine = StartCoroutine(CheckSwipe());
+    }
+    private void StopInputControll()
+    {
+        StopCoroutine(_swipeCoroutine);
+        _isGameStarted = false;
+    }
+    private IEnumerator CheckSwipe()
+    {
+        while (true)
         {
-            var currentPositionX = GetTouchPosition().x;
-            var magnitude = currentPositionX - _touchPositionX;
-            _touchPositionX = currentPositionX;
-            if (Mathf.Abs(magnitude) > _maxMagnitude)
+            if (Input.GetMouseButtonDown(0))
             {
-                magnitude = _maxMagnitude * Mathf.Sign(magnitude);
+                _touchPositionX = GetTouchPosition().x;                
             }
-            Debug.Log("[InputController] magnitude = " + magnitude);
-            OnSwipe?.Invoke(magnitude);
+            if (Input.GetMouseButton(0))
+            {
+                var currentPositionX = GetTouchPosition().x;
+                var magnitude = currentPositionX - _touchPositionX;
+                _touchPositionX = currentPositionX;
+                if (Mathf.Abs(magnitude) > _maxMagnitude)
+                {
+                    magnitude = _maxMagnitude * Mathf.Sign(magnitude);
+                }
+                OnSwipe?.Invoke(magnitude);
+            }
+            yield return null;
         }
     }
 
