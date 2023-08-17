@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
@@ -14,7 +12,7 @@ public class Wall : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         var stopableObject = collision.gameObject.GetComponent<IStopable>();
-        if(stopableObject != null)
+        if (stopableObject != null)
         {
             var directionToCube = collision.gameObject.transform.position - transform.position;
             if (directionToCube.y > _maxPositionDifferenceCube) return;

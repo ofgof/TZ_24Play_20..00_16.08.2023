@@ -1,15 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ViewController : MonoBehaviour
 {
-    
-
     [SerializeField] StartView _startView;
     [SerializeField] FailView _failView;
-
-   
 
     public void Init()
     {

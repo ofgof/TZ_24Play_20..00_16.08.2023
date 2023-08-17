@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputController : MonoBehaviour
@@ -49,7 +48,7 @@ public class InputController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                _touchPositionX = GetTouchPosition().x;                
+                _touchPositionX = GetTouchPosition().x;
             }
             if (Input.GetMouseButton(0))
             {

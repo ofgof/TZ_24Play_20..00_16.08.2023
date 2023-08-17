@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ public class LevelController : MonoBehaviour
     private int _chunkCount = 1;
     public void Init()
     {
-        for(int i = 0; i < _visibleChunks; i++)
+        for (int i = 0; i < _visibleChunks; i++)
         {
             SpawnChunk();
         }
@@ -39,7 +38,7 @@ public class LevelController : MonoBehaviour
         for (int i = 0; i < _mapTransform.childCount; i++)
         {
             var child = _mapTransform.GetChild(i).transform;
-            if(child.position.z < visiableChunkPosition)
+            if (child.position.z < visiableChunkPosition)
             {
                 Destroy(child.gameObject);
             }

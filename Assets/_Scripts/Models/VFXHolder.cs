@@ -16,7 +16,7 @@ public class VFXHolder : MonoBehaviour
         foreach (var vfx in _VFXConfig.VFXList)
         {
             if (_VFXDict.ContainsKey(vfx.type)) continue;
-            
+
             _VFXDict.Add(vfx.type, vfx);
         }
 
@@ -38,7 +38,7 @@ public class VFXHolder : MonoBehaviour
         {
             yield return new WaitForSeconds(5f);
             var cameraPosition = _camera.transform.position;
-            for(int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i < transform.childCount; i++)
             {
                 var child = transform.GetChild(i).transform;
                 if (cameraPosition.z - child.position.z > 10)

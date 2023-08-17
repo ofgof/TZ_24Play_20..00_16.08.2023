@@ -1,7 +1,5 @@
 using DG.Tweening;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -25,17 +23,6 @@ public class StartView : View
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     [Serializable]
     private class Hand
     {
@@ -57,14 +44,13 @@ public class StartView : View
         public void PlayAnimation()
         {
             _animation.Restart();
-            //_animation.Play();
         }
         private Sequence HandAnimation()
         {
             Sequence sequence = DOTween.Sequence();
             Sequence scaleSequence = DOTween.Sequence();
             Sequence moveSequence = DOTween.Sequence();
-            
+
             float scaleDurration = _animationDuration * 0.4f;
             float moveDurration = _animationDuration * 0.5f;
             float waitDurration = _animationDuration * 0.3f;

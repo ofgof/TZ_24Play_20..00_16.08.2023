@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Collector : MonoBehaviour
@@ -15,7 +13,7 @@ public class Collector : MonoBehaviour
 
         Debug.Log(other.gameObject.name);
         var chunkEnd = other.gameObject.GetComponent<ChunkEnd>();
-        if(chunkEnd != null)
+        if (chunkEnd != null)
         {
             Debug.Log("OnCrossChunk");
             GameManager.OnCrossChunk?.Invoke();

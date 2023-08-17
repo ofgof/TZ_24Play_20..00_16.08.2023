@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -21,12 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private LevelController _levelController;
 
-    private bool _isGame = false;
-
     public GlobalConstants GlobalConstants => _globalConstants;
     public VFXHolder VFXHolder => _VFXHolder;
-
-    public bool IsGame => _isGame;
 
     private void Awake()
     {

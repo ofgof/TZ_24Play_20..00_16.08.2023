@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,7 +26,6 @@ public class FailView : View
         _tryAgainButton.onClick.AddListener(() =>
         {
             Debug.Log("Reload scene");
-            //GameManager.OnGameRestart?.Invoke();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         });
     }

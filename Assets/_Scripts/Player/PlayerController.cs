@@ -1,6 +1,4 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -57,7 +55,7 @@ public class PlayerController : MonoBehaviour
         var deltaPosition = direction * _sideSpeed * Time.deltaTime * Vector3.right;
         var targetPosition = position + deltaPosition;
 
-        if(Mathf.Abs(targetPosition.x) < _halfTrackWeidth)
+        if (Mathf.Abs(targetPosition.x) < _halfTrackWeidth)
         {
             _sideSequence.Append(transform.DOMoveX(targetPosition.x, Time.deltaTime));
         }
@@ -83,11 +81,7 @@ public class PlayerController : MonoBehaviour
             newCube.transform.localPosition = targetPosition;
             newCube.SetActive(true);
             GameManager.Instance.VFXHolder.SpawnVFX(VFXType.CollectVFX, newCube.transform.position);
-            //var collect = Instantiate(GameManager.Instance.VFXHolder.GetVFX(VFXType.CollectVFX));
-            //collect.transform.position = newCube.transform.position;
             var plusOne = GameManager.Instance.VFXHolder.SpawnVFX(VFXType.CollectPlusOne, _character.transform.position);
-            //Instantiate(GameManager.Instance.VFXHolder.GetVFX(VFXType.CollectPlusOne));
-            //plusOne.transform.position = _character.transform.position;
             plusOne.transform.DOMoveY(_character.transform.position.y + 1.5f, duration).SetEase(Ease.Linear);
         });
     }
