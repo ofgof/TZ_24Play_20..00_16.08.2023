@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Vector3 _startPosition;
     [SerializeField] private float _halfTrackWeidth;
+    [SerializeField] private float _trackLength;
     [SerializeField] private float _forwardSpeed;
     [SerializeField] private float _sideSpeed;
 

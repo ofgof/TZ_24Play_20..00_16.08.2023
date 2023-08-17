@@ -25,7 +25,7 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         //CheckSwipe();
-        if (!_isGameStarted)
+        if (!_isGameStarted && Input.GetMouseButtonDown(0))
         {
             _isGameStarted = true;
             GameManager.OnGameStart?.Invoke();

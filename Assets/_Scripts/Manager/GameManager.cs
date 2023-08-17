@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public static Action OnGameRestart;
     public static Action OnGameEnd;
 
+    public static Action OnCrossChunk;
+
     [SerializeField] private GlobalConstants _globalConstants;
     [SerializeField] private VFXHolder _VFXHolder;
 

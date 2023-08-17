@@ -385,6 +385,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chunkLenght: 30
   _chunkPrefabs:
+  - {fileID: 1881606624106944819, guid: 43efe9b128b1350428fdd835d6dae08c, type: 3}
+  - {fileID: 1881606624106944819, guid: 85332dd823f241547b3d38b976b82857, type: 3}
   - {fileID: 1881606624106944819, guid: dfed908d2a77116459835a3807373fb4, type: 3}
 --- !u!4 &393142812
 Transform:
@@ -990,7 +992,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1.2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1188763658
 GameObject:
@@ -1568,6 +1570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startPosition: {x: 0, y: 0, z: 0}
   _halfTrackWeidth: 2
+  _trackLength: 30
   _forwardSpeed: 5
   _sideSpeed: 0.5
   _cubeHolder: {fileID: 1808385022}
@@ -2236,6 +2239,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Chunk
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174751855818365954, guid: dfed908d2a77116459835a3807373fb4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfed908d2a77116459835a3807373fb4, type: 3}
