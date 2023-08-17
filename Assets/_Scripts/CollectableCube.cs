@@ -15,6 +15,7 @@ public class CollectableCube : MonoBehaviour, ICollectable, IStopable
 
     public void Stop()
     {
+        Collector.OnLose?.Invoke();
         transform.parent = null;
         Destroy(this);
     }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Vector3 _startPosition;
     [SerializeField] private float _halfTrackWeidth;
     [SerializeField] private float _trackLength;
     [SerializeField] private float _forwardSpeed;
@@ -13,22 +12,19 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject _cubeHolder;
     [SerializeField] private GameObject _character;
+    [SerializeField] private GameObject _speedVFX;
 
     [SerializeField] private AnimatorController _animatorController;
-
-    private Coroutine _moveCoroutine;
 
     private Sequence _sideSequence;
     public void Init()
     {
-        _startPosition = transform.position;
+        _speedVFX.SetActive(false);
 
         InputController.OnSwipe += MoveSide;
         Collector.OnCollect += CollectAnimation;
         GameManager.OnGameStart += StartMove;
         GameManager.OnGameEnd += StopMove;
-
-        GameManager.OnGameRestart += ResetPlayer;
     }
     private void OnDestroy()
     {
@@ -37,11 +33,10 @@ public class PlayerController : MonoBehaviour
         GameManager.OnGameStart -= StartMove;
         GameManager.OnGameEnd -= StopMove;
 
-        GameManager.OnGameRestart -= ResetPlayer;
-
     }
     private void StartMove()
     {
+        _speedVFX.SetActive(true);
         MoveForward();
     }
     private void MoveForward()
@@ -93,10 +88,5 @@ public class PlayerController : MonoBehaviour
             plusOne.transform.position = _character.transform.position;
             plusOne.transform.DOMoveY(_character.transform.position.y + 1.5f, duration).SetEase(Ease.Linear);
         });
-    }
-
-    private void ResetPlayer()
-    {
-        transform.position = _startPosition;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Collector : MonoBehaviour
 {
     public static Action<GameObject> OnCollect;
+    public static Action OnLose;
 
     private void OnTriggerEnter(Collider other)
     {
